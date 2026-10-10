@@ -51,7 +51,7 @@ int main(int argc, char *argv[]) {
     ToDo 7: Parent process must wait for all children processes to complete.
     */
 
-    for (int process_count; process_count < num_processes; process_count++) {
+    for (int process_count = 0; process_count < num_processes; process_count++) {
         pid_t pid = fork();
 
         if (pid == 0) {
