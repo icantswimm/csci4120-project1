@@ -1,3 +1,5 @@
+// Gregory Olmstead, John Renfro, Quinn Sansom
+
 #include "Module_A.h"
 
 int main(int argc, char *argv[]) {

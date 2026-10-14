@@ -1,3 +1,5 @@
+// Gregory Olmstead, John Renfro, Quinn Sansom
+
 #ifndef PROJECT1_H
 #define PROJECT1_H
 
