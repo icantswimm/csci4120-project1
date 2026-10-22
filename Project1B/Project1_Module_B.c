@@ -122,8 +122,8 @@ int main(int argc, char *argv[]) {
     // Calculate execution time
     seconds=end.tv_sec - start.tv_sec;
     nano_seconds=end.tv_nsec - start.tv_nsec;
-    long double executio_time=(long double)seconds+((long double)nano_seconds/1>
-    printf("Execution Time with %d process(es): %Lf\n",num_processes,executio_t>
+    long double executio_time=(long double)seconds+((long double)nano_seconds/1);
+    printf("Execution Time with %d process(es): %Lf\n",num_processes,executio_time);
 
 
     /* ToDo7:
