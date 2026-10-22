@@ -4,7 +4,7 @@
 int main(int argc, char *argv[]) {
 
     if (argc != 6) {
-        printf("Usage: %s <starting_row_number> <number_of_rows_to_sum> shmid_m>
+        printf("Usage: %s <starting_row_number> <number_of_rows_to_sum> <shmid_m> <partial_sum_index>", argv[0]);
         return 1;
     }
 
