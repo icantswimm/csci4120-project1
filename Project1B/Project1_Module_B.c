@@ -104,8 +104,6 @@ int main(int argc, char *argv[]) {
         wait(NULL);
     }
 
-    printf("Usage: %s <number_of_processes>\n", argv[0]);
-
     /* ToDo6:
      * Sum all the partial-sums stored in sharred memory region 2 (by children >
      * and print the sum.
