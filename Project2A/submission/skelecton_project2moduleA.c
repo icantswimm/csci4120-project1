@@ -88,6 +88,7 @@ int main(int argc, char *argv[]) {
         errno_t file_errno = ferror(input_fileptr);
         printf("input file could not be read (file errno: %d): %s\n", file_errno, input_file);
         clearerr(input_fileptr);
+        free(pixels);
         exit(1);
     }
 
@@ -98,6 +99,7 @@ int main(int argc, char *argv[]) {
 
     if (return_val != 0) {
         printf("input file could not close gracefully (errno: %d): %s\n", errno, input_file);
+        free(pixels);
         exit(1);
     }
     
@@ -143,6 +145,7 @@ int main(int argc, char *argv[]) {
 
     if (output_fileptr == NULL) {
         printf("input file could not be opened (errno: %d): %s\n", errno, output_file);
+        free(pixels);
         exit(1);
     }
     
@@ -167,6 +170,7 @@ int main(int argc, char *argv[]) {
 
     if (number_of_elements_wrote == 0 || number_of_elements_wrote != num_to_write) {
         printf("output file could not be written (errno: %d): %s\n", errno, output_file);
+        free(pixels);
         exit(1);
     }
     
@@ -178,6 +182,7 @@ int main(int argc, char *argv[]) {
 
     if (return_val != 0) {
         printf("input file could not close gracefully (errno: %d): %s\n", errno, output_file);
+        free(pixels);
         exit(1);
     }
     
