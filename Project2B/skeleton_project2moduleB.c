@@ -111,22 +111,36 @@ int main(int argc, char *argv[]) {
     Create worker_thrd_cnt number of threads. 
     Each thread is responsible for doing the threshold operation on pixles of height/worker_thread_cnt number of rows. 
     */
-    pthread_t *threads = malloc(worker_thread_cnt * sizeof(pthread_t));
-    thread_arg_t *args = malloc(worker_thread_cnt * sizeof(thread_arg_t));
-    if (threads == NULL || args == NULL) {
-        fprintf(stderr, "Failed to allocate threads\n");
-        exit(0);
+    pthread_t threads[worker_thread_cnt];
+    struct arguments args[worker_thread_cnt];
+    int rows_per_thread = height / worker_thread_cnt;
+
+    for (int i = 0; i < worker_thread_cnt; i++) {
+        args[i].image = (unsigned char *)image;
+        args[i].width = width;
+        args[i].start_row = i * rows_per_thread;
+        args[i].end_row = (i + 1) * rows_per_thread;
+
+        int rc = pthread_create(&threads[i], NULL, (void *(*)(void *))threshold_operation, &args[i]);
+        if (rc != 0) {
+            printf("Failed to create thread %d\n", i);
+            free(image);
+            exit(0);
+        }
     }
 
     /*
     ========================================ToDo 3:==============================
     Make the parent thread (the one that is generating new threads) wait for all threads to complete before proceeding.
     */
-    
-    // Free threads and args
-    free(threads);
-    free(args);
-
+    for (int i = 0; i < worker_thread_cnt; i++) {
+        int rc = pthread_join(threads[i], NULL);
+        if (rc != 0) {
+            printf("Failed to join thread %d\n", i);
+            free(image);
+            exit(0);
+        }
+    }
 
     /*
     open the ouput file
