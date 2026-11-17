@@ -2,8 +2,8 @@
 
 CC = gcc
 CFLAGS = -Wall -O2
-TARGET = mt_greyscal2blacknwhite
-SRC = mt_greyscal2blacknwhite.c
+TARGET = skeleton_project3ModuleA
+SRC = skeleton_project3ModuleA.c
 
 all: $(TARGET)
 

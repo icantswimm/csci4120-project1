@@ -33,7 +33,7 @@ struct arguments {
 void* threshold_operation(void *arg){
     struct arguments *args = (struct arguments *)arg;
 
-    char* my_image=args->image;
+    unsigned char* my_image=args->image;
     int start_index=(args->start_row)*(args->width);
     int end_index=(args->end_row)*(args->width);
 

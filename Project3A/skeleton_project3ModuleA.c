@@ -1,4 +1,5 @@
 #include "project3ModA.h"
+#include <errno.h>
 
 int main(int argc, char *argv[]) {
     
@@ -71,7 +72,7 @@ int main(int argc, char *argv[]) {
     Hint: google "man malloc";
     */
 
-    char *image=malloc(width*height*1);
+    unsigned char *image=malloc(width*height*1);
     
 
     if(image==NULL)
@@ -156,9 +157,28 @@ int main(int argc, char *argv[]) {
 
         // ToDo 1: Set affinity of (i.e., pin it) each newly created thread to core 1.
 
-       
+        cpu_set_t cpuset;
+        CPU_ZERO(&cpuset);
+        CPU_SET(1, &cpuset);
+
+        int ret = pthread_setaffinity_np(tid[i], sizeof(cpu_set_t), &cpuset);
+
+        if (ret != 0) {
+            printf("set affinity returned error: %d\n", errno);
+            exit(0);
+        }
 
         //ToDo 2: Set the user-specified policy for all newly created threads
+
+        struct sched_param param;
+        param.sched_priority = 10;
+
+        ret = pthread_setschedparam(tid[i], policy, &param);
+
+        if (ret != 0) {
+            printf("set sched param returned error: %d\n", errno);
+            exit(0);
+        }
 
 	}
 
